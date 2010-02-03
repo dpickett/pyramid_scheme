@@ -10,8 +10,10 @@ begin
     gem.email = "dpickett@enlightsolutions.com"
     gem.homepage = "http://github.com/dpickett/pyramid_scheme"
     gem.authors = ["Dan Pickett"]
+    gem.add_dependency "rake", ">= 0.8.7"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
+    gem.add_development_dependency "mocha", "0.9.8"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
