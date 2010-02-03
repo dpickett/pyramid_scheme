@@ -31,6 +31,20 @@ describe PyramidScheme::IndexProvider::FileSystem do
       @configuration[:source_path], @configuration[:lock_file_name]))
     @provider.index_in_progress?.should be_true
   end
+
+  it 'should sleep if the server is still indexing' do
+    @provider.stubs(:index_in_progress?).returns(true).then.returns(false)
+    Kernel.expects(:sleep).once
+    @provider.copy
+    @provider.copy_attempts.should eql(2)
+  end
+
+  it 'should raise an error if the server is stuck indexing' do
+    Kernel.stub!(:sleep)
+    @provider.stubs(:index_in_progress?).returns(true)
+    lambda { @provider.copy }.should raise_error
+  end
+
 end
 
 describe "copying from the filesytem" do
