@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/dpickett/pyramid_scheme"
     gem.authors = ["Dan Pickett"]
     gem.add_dependency "rake", ">= 0.8.7"
+    gem.add_dependency "configatron"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
     gem.add_development_dependency "mocha", "0.9.8"
