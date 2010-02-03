@@ -8,7 +8,8 @@ require 'pyramid_scheme/indexer'
 require 'pyramid_scheme/thinking_sphinx_indexer'
 require 'pyramid_scheme/ultrasphinx_indexer'
 
-require 'pyramid_scheme/index_provider_configuration'
+require 'pyramid_scheme/index_lock_file'
+require 'pyramid_scheme/configuration'
 require 'pyramid_scheme/index_provider/file_system'
 
 require 'pyramid_scheme/index_server'
@@ -17,6 +18,10 @@ require 'pyramid_scheme/index_client'
 
 module PyramidScheme
   def self.configure(&block)
-    PyramidScheme::IndexProviderConfiguration.set(&block)
+    PyramidScheme::Configuration.set(&block)
+  end
+
+  def self.configuration
+    PyramidScheme::Configuration.new
   end
 end

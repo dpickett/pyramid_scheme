@@ -4,6 +4,7 @@ describe PyramidScheme::IndexProvider::FileSystem do
   before(:each) do
     @provider = PyramidScheme::IndexProvider::FileSystem.new
   end
+  include FakeFS::SpecHelpers
 
   it 'should have a configuration' do
     @provider.configuration.should_not be_nil 
@@ -23,8 +24,12 @@ describe PyramidScheme::IndexProvider::FileSystem do
     end
   end
 
-  it 'should have a method that verifies if an index is in process' do
-    @provider.index_in_progress?.should be_false
+  it 'should indicate that an index is in process if a lock file is present' do
+    @configuration = PyramidScheme::Configuration.new
+    FileUtils.mkdir_p(@configuration[:source_path])
+    FileUtils.touch(File.join(
+      @configuration[:source_path], @configuration[:lock_file_name]))
+    @provider.index_in_progress?.should be_true
   end
 end
 

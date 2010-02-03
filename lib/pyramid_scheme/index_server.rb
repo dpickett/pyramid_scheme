@@ -1,11 +1,12 @@
 module PyramidScheme
   class IndexServer
-    attr_reader :indexer_class
+    attr_reader :indexer_class, :configuration
     
     # initializes a new index server
     # @param options [Hash] takes an optional :indexer_class (defaults to PyramidScheme::ThinkingSphinxIndexer 
     def initialize(options = {})
       @indexer_class = options[:indexer_class] || PyramidScheme::ThinkingSphinxIndexer
+      @configuration = PyramidScheme::Configuration.new
     end
 
     # @returns [PyramidScheme::Indexer] an instance of the specified indexer_class from initialization
@@ -15,7 +16,18 @@ module PyramidScheme
 
     # run the index
     def index
+      create_lock_file
       indexer.index
+      destroy_lock_file
     end
+
+    private
+      def create_lock_file
+        PyramidScheme::IndexLockFile.create
+      end
+
+      def destroy_lock_file
+        PyramidScheme::IndexLockFile.destroy
+      end
   end
 end

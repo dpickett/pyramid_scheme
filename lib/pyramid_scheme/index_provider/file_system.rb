@@ -5,20 +5,20 @@ module PyramidScheme
       attr_reader :configuration
 
       def initialize(options = {})
-        @configuration = PyramidScheme::IndexProviderConfiguration.new(options)
+        @configuration = PyramidScheme::Configuration.new(options)
         ensure_required_options_are_present
       end
 
       def index_in_progress?
-        #TODO - dp implementation
-        false
+        PyramidScheme::IndexLockFile.exists?
       end
 
       private
+        
         def ensure_required_options_are_present
           REQUIRED_OPTIONS.each do |opt|
-            if @configuration[opt].nil?
-              raise PyramidScheme::RequiredConfigurationNotFound, "an #{opt} setting was not found"
+            if configuration[opt].nil?
+              raise PyramidScheme::RequiredConfigurationNotFound, "the #{opt} setting was not found"
             end
           end
         end
