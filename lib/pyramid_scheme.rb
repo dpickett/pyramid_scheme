@@ -2,6 +2,8 @@ require 'rubygems'
 require 'rake'
 require 'configatron'
 
+require 'pyramid_scheme/required_configuration_not_found'
+
 require 'pyramid_scheme/indexer'
 require 'pyramid_scheme/thinking_sphinx_indexer'
 require 'pyramid_scheme/ultrasphinx_indexer'
@@ -14,7 +16,7 @@ require 'pyramid_scheme/index_server'
 require 'pyramid_scheme/index_client'
 
 module PyramidScheme
-  def configure(&block)
-    PyramidScheme::IndexProviderConfiguration.set(block)
+  def self.configure(&block)
+    PyramidScheme::IndexProviderConfiguration.set(&block)
   end
 end

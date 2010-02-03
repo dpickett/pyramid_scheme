@@ -8,5 +8,10 @@ require 'rubygems'
 require 'mocha'
 
 Spec::Runner.configure do |config|
-  
+  config.before(:each) do
+    PyramidScheme.configure do |config|
+      config.source_path = '/some/default/source'
+      config.destination_path = '/some/default/destination'
+    end
+  end  
 end
