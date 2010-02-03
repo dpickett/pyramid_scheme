@@ -4,6 +4,9 @@ require 'pyramid_scheme'
 require 'spec'
 require 'spec/autorun'
 
+require 'rubygems'
+require 'mocha'
+
 Spec::Runner.configure do |config|
   
 end
