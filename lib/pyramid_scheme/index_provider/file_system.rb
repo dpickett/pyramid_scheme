@@ -67,7 +67,9 @@ module PyramidScheme
       def copy_client_files
         Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
           Dir[File.join(self.configuration[:client_source_path], "*#{ext}")].each do |f|
-            FileUtils.cp_r(f, "#{self.configuration[:client_destination_path]}")
+            new_filename = File.basename(f.gsub(/\./, ".new."))
+            FileUtils.cp_r(f, 
+              "#{self.configuration[:client_destination_path]}/#{new_filename}")
           end
         end
 

@@ -70,10 +70,42 @@ describe PyramidScheme::IndexProvider::FileSystem do
       File.exists?(File.join(PyramidScheme.configuration[:server_destination_path], f)).should be_true
     end
   end
-
 end
 
 describe "copying from the filesytem" do
-  it 'should copy the files with .new extensions'
+  include FakeFS::SpecHelpers
+
+  before(:each) do
+    @configuration = PyramidScheme::Configuration.new
+    @provider = PyramidScheme::IndexProvider::FileSystem.new
+    FileUtils.mkdir_p(@configuration[:client_source_path])
+    FileUtils.mkdir_p(@configuration[:client_destination_path])
+
+  end
+
+  it 'should copy the files with .new extensions' do
+    @filenames = [
+      '.spi',
+      '.spd',
+      '.spa',
+      '.sph',
+      '.spm',
+      '.spp'
+    ].collect{|s| "some_index#{s}" }
+
+    @filenames.each do |f|
+      FileUtils.touch(File.join(PyramidScheme.configuration[:client_source_path], f))
+      File.exists?(File.join(PyramidScheme.configuration[:client_source_path], f)).should be_true
+    end
+
+    @provider.retrieve_index
+
+    @filenames.each do |f|
+      new_filename = File.basename(f).gsub(/\./, ".new.")
+      File.exists?(File.join(PyramidScheme.configuration[:client_destination_path], 
+        new_filename)).should be_true
+    end
+
+  end
 end
 
