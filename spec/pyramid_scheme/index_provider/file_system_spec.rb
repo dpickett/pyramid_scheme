@@ -11,8 +11,10 @@ describe PyramidScheme::IndexProvider::FileSystem do
   end
 
   [
-    :source_path,
-    :destination_path
+    :server_source_path,
+    :server_destination_path,
+    :client_source_path,
+    :client_destination_path
   ].each do |option|
     it "should require the #{option} configuration option" do
       PyramidScheme.configure do |config|
@@ -26,9 +28,9 @@ describe PyramidScheme::IndexProvider::FileSystem do
 
   it 'should indicate that an index is in process if a lock file is present' do
     @configuration = PyramidScheme::Configuration.new
-    FileUtils.mkdir_p(@configuration[:source_path])
+    FileUtils.mkdir_p(@configuration[:client_source_path])
     FileUtils.touch(File.join(
-      @configuration[:source_path], @configuration[:lock_file_name]))
+      @configuration[:client_source_path], @configuration[:lock_file_name]))
     @provider.index_in_progress?.should be_true
   end
 

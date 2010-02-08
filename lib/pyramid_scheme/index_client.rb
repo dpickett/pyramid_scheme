@@ -8,6 +8,5 @@ module PyramidScheme
     def copy
       @index_provider.copy
     end
-
   end
 end

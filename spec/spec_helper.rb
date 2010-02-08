@@ -12,8 +12,10 @@ require 'fakefs/spec_helpers'
 Spec::Runner.configure do |config|
   config.before(:each) do
     PyramidScheme.configure do |config|
-      config.source_path = '/some/default/source'
-      config.destination_path = '/some/default/destination'
+      config.client_source_path = '/some/default/source'
+      config.client_destination_path = '/some/default/destination'
+      config.server_source_path = '/some/server/source'
+      config.server_destination_path = '/some/server/destination'
     end
   end  
 end

@@ -1,20 +1,25 @@
 module PyramidScheme
   class IndexLockFile
-    def self.path
-      File.join(PyramidScheme.configuration[:source_path], 
+    def self.server_path
+      File.join(PyramidScheme.configuration[:server_destination_path], 
+        PyramidScheme.configuration[:lock_file_name])
+    end
+
+    def self.client_path
+      File.join(PyramidScheme.configuration[:client_source_path], 
         PyramidScheme.configuration[:lock_file_name])
     end
 
     def self.exists?
-      File.exists?(path)
+      File.exists?(client_path)
     end
 
     def self.create
-      FileUtils.touch(path)
+      FileUtils.touch(server_path)
     end 
 
     def self.destroy
-      FileUtils.rm_f(path)
+      FileUtils.rm_f(server_path)
     end
   end
 end

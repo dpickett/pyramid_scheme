@@ -2,7 +2,13 @@ module PyramidScheme
   module IndexProvider
     class FileSystem
       MAXIMUM_COPY_ATTEMPTS = 5
-      REQUIRED_OPTIONS = [:source_path, :destination_path]
+      REQUIRED_OPTIONS = [
+        :server_source_path, 
+        :server_destination_path,
+        :client_source_path,
+        :client_destination_path
+      ]
+
       attr_reader :configuration, :copy_attempts
 
       def initialize(options = {})
@@ -13,6 +19,13 @@ module PyramidScheme
 
       def index_in_progress?
         PyramidScheme::IndexLockFile.exists?
+      end
+
+      def process_index
+      end
+
+      def retrieve_index
+        copy
       end
 
       def copy
@@ -38,8 +51,12 @@ module PyramidScheme
           Kernel.sleep(5)
           copy
         else
-          #TODO - dp - actually implement provider copy 
+          copy_files
         end
+      end
+
+      def copy_files
+
       end
 
       def exceeded_maximum_copy_attempts?
