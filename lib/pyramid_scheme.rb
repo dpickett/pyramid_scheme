@@ -16,7 +16,6 @@ require 'pyramid_scheme/index_server'
 
 require 'pyramid_scheme/index_client'
 
-require 'pyramid_scheme/tasks/rake_tasks.rake'
 require 'pyramid_scheme/tasks'
 
 module PyramidScheme
