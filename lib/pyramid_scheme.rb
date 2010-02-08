@@ -16,6 +16,8 @@ require 'pyramid_scheme/index_server'
 
 require 'pyramid_scheme/index_client'
 
+require 'pyramid_scheme/tasks'
+
 module PyramidScheme
   def self.configure(&block)
     PyramidScheme::Configuration.set(&block)
