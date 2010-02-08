@@ -9,6 +9,7 @@ require 'mocha'
 require 'fakefs'
 require 'fakefs/spec_helpers'
 
+
 Spec::Runner.configure do |config|
   config.before(:each) do
     PyramidScheme.configure do |config|

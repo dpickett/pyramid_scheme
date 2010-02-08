@@ -22,6 +22,7 @@ module PyramidScheme
       end
 
       def process_index
+        server_copy
       end
 
       def retrieve_index
@@ -29,6 +30,14 @@ module PyramidScheme
       end
 
       private
+      def server_copy
+        Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
+          Dir[File.join(self.configuration[:server_source_path], "*#{ext}")].each do |f|
+            FileUtils.cp_r(f, "#{self.configuration[:server_destination_path]}")
+          end
+        end
+      end
+
       def client_copy
         if !exceeded_maximum_copy_attempts?
           attempt_to_copy
@@ -51,11 +60,16 @@ module PyramidScheme
           Kernel.sleep(5)
           client_copy
         else
-          copy_files
+          copy_client_files
         end
       end
 
-      def copy_files
+      def copy_client_files
+        Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
+          Dir[File.join(self.configuration[:client_source_path], "*#{ext}")].each do |f|
+            FileUtils.cp_r(f, "#{self.configuration[:client_destination_path]}")
+          end
+        end
 
       end
 

@@ -1,5 +1,14 @@
 module PyramidScheme
   class Configuration
+    INDEX_FILE_EXTENSIONS = [
+      '.spa',
+      '.spd',
+      '.sph',
+      '.spi',
+      '.spm',
+      '.spp'
+    ]
+
     def initialize(options = {})
       self.class.set do |config|
         options.each do |key, value|

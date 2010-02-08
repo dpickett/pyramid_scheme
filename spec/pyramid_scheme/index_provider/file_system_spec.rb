@@ -47,6 +47,30 @@ describe PyramidScheme::IndexProvider::FileSystem do
     lambda { @provider.retrieve_index }.should raise_error
   end
 
+  it 'should copy all sphinx files from server source to server destination' do
+    FileUtils.mkdir_p(PyramidScheme.configuration[:server_source_path])   
+    FileUtils.mkdir_p(PyramidScheme.configuration[:server_destination_path])
+    @filenames = [
+      '.spi',
+      '.spd',
+      '.spa',
+      '.sph',
+      '.spm',
+      '.spp'
+    ].collect{|s| "some_index#{s}" }
+
+    @filenames.each do |f|
+      FileUtils.touch(File.join(PyramidScheme.configuration[:server_source_path], f))
+      File.exists?(File.join(PyramidScheme.configuration[:server_source_path], f)).should be_true
+    end
+
+    @provider.process_index
+    
+    @filenames.each do |f|
+      File.exists?(File.join(PyramidScheme.configuration[:server_destination_path], f)).should be_true
+    end
+  end
+
 end
 
 describe "copying from the filesytem" do
