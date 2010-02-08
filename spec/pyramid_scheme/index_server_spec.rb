@@ -19,7 +19,10 @@ describe PyramidScheme::IndexServer do
   end
 
   it 'should allow me to specify an ultrasphinx indexer' do
-    @server = PyramidScheme::IndexServer.new(:indexer_class => PyramidScheme::UltrasphinxIndexer)
+    PyramidScheme.configure do |config|
+      config.indexer_class = PyramidScheme::UltrasphinxIndexer
+    end
+    @server = PyramidScheme::IndexServer.new
     @server.indexer.should be_kind_of(PyramidScheme::UltrasphinxIndexer)
   end
 
