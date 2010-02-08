@@ -5,8 +5,24 @@ module PyramidScheme
       @index_provider = PyramidScheme::IndexProvider::FileSystem.new
     end
 
-    def copy
-      @index_provider.copy
+    def retrieve_index
+      @index_provider.retrieve_index
+      bounce_pids
     end
+
+    def searchd_pids
+      ps_output = `ps ax | grep searchd`
+      ps_output.split("\n").collect{|p| /^(\d*)/.match(p)[0]}
+    end
+
+    def bounce_pids
+      searchd_pids.each do |pid|
+        begin
+          Process.kill("HUP", pid)
+        rescue 
+        end
+      end
+    end
+
   end
 end
