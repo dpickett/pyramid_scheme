@@ -25,10 +25,11 @@ module PyramidScheme
       end
 
       def retrieve_index
-        copy
+        client_copy
       end
 
-      def copy
+      private
+      def client_copy
         if !exceeded_maximum_copy_attempts?
           attempt_to_copy
         else
@@ -36,7 +37,6 @@ module PyramidScheme
         end
       end
 
-      private
       def ensure_required_options_are_present
         REQUIRED_OPTIONS.each do |opt|
           if configuration[opt].nil?
@@ -49,7 +49,7 @@ module PyramidScheme
         @copy_attempts += 1
         if index_in_progress?
           Kernel.sleep(5)
-          copy
+          client_copy
         else
           copy_files
         end
