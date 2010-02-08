@@ -6,9 +6,10 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "pyramid_scheme"
     gem.summary = %Q{Sphinx index propagation}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = %Q{Sphinx index propagtion (currently via the filesystem)}
     gem.email = "dpickett@enlightsolutions.com"
     gem.homepage = "http://github.com/dpickett/pyramid_scheme"
+    gem.files += FileList['lib/**/*.rake']
     gem.authors = ["Dan Pickett"]
     gem.add_dependency "rake", ">= 0.8.7"
     gem.add_dependency "configatron"

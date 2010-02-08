@@ -1,6 +1,29 @@
 = pyramid_scheme
 
-Description goes here.
+Index propagation for sphinx to eliminate redundant indexing. Run indexing once on an index server and have index clients retrieve the required files.
+
+Use this if you have a distributed system for your application servers where each one requires a dedicated searchd process locally.
+
+Supports ThinkingSphinx and Ultrasphinx
+
+== Filesystem Configuration
+
+Toss this in an initalizer like config/initializers/pyramid_scheme.rb
+
+  PyramidScheme.configure do |config|
+    config.client_source_path = '/some/client/source'
+    config.client_destination_path = '/some/client/destination'
+    config.server_source_path = '/some/server/source'
+    config.server_destination_path = '/some/server/destination'
+  end
+
+In your Rakefile, require 'pyramid_scheme/tasks' after your thinking sphinx or ultrasphinx require statement
+
+Your client source and server destination paths should point to the same storage path for the transfer to behave the way you want it to. 
+
+The server must run an index via rake pyramid_scheme:index for files to be placed properly for the client to pick up. A lock file will be created in the server destination directory
+
+The client must run an index via rake pyramid_scheme:retrieve_index - upon retrieval, will send a sighup to your searchd process to rotate the indexes
 
 == Note on Patches/Pull Requests
  
