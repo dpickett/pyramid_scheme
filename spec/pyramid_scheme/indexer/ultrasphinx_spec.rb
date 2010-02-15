@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe PyramidScheme::UltrasphinxIndexer do
+describe PyramidScheme::Indexer::Ultrasphinx do
   before(:each) do
-    @indexer = PyramidScheme::UltrasphinxIndexer.new
+    @indexer = PyramidScheme::Indexer::Ultrasphinx.new
   end
 
   it 'should have the default rake task of ultrasphinx:index' do

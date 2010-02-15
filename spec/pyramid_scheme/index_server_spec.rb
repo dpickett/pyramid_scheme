@@ -15,15 +15,15 @@ describe PyramidScheme::IndexServer do
   end
 
   it 'should default to a thinking sphinx indexer' do
-    @server.indexer.should be_kind_of(PyramidScheme::ThinkingSphinxIndexer)
+    @server.indexer.should be_kind_of(PyramidScheme::Indexer::ThinkingSphinx)
   end
 
   it 'should allow me to specify an ultrasphinx indexer' do
     PyramidScheme.configure do |config|
-      config.indexer_class = PyramidScheme::UltrasphinxIndexer
+      config.indexer_class = PyramidScheme::Indexer::Ultrasphinx
     end
     @server = PyramidScheme::IndexServer.new
-    @server.indexer.should be_kind_of(PyramidScheme::UltrasphinxIndexer)
+    @server.indexer.should be_kind_of(PyramidScheme::Indexer::Ultrasphinx)
   end
 
   it 'should index via the indexer' do

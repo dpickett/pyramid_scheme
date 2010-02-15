@@ -7,10 +7,10 @@ module PyramidScheme
     def initialize(options = {})
       @index_provider = PyramidScheme::IndexProvider::FileSystem.new
       @configuration = PyramidScheme::Configuration.new
-      @indexer_class = configuration[:indexer_class] || PyramidScheme::ThinkingSphinxIndexer
+      @indexer_class = configuration[:indexer_class] || PyramidScheme::Indexer::ThinkingSphinx
     end
 
-    # @returns [PyramidScheme::Indexer] an instance of the specified indexer_class from initialization
+    # @returns [PyramidScheme::Indexer::Base] an instance of the specified indexer_class from initialization
     def indexer
       @indexer ||= @indexer_class.new
     end

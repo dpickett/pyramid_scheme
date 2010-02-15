@@ -4,9 +4,10 @@ require 'configatron'
 
 require 'pyramid_scheme/required_configuration_not_found'
 
-require 'pyramid_scheme/indexer'
-require 'pyramid_scheme/thinking_sphinx_indexer'
-require 'pyramid_scheme/ultrasphinx_indexer'
+require 'pyramid_scheme/indexer/base'
+require 'pyramid_scheme/indexer/thinking_sphinx'
+require 'pyramid_scheme/indexer/ultrasphinx'
+
 
 require 'pyramid_scheme/index_lock_file'
 require 'pyramid_scheme/configuration'

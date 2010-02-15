@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe PyramidScheme::ThinkingSphinxIndexer do 
+describe PyramidScheme::Indexer::ThinkingSphinx do
   before(:each) do
-    @indexer = PyramidScheme::ThinkingSphinxIndexer.new
+    @indexer = PyramidScheme::Indexer::ThinkingSphinx.new
   end
 
   it 'should have the default rake task of ts:in' do
