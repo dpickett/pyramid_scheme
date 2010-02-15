@@ -56,7 +56,8 @@ describe PyramidScheme::IndexProvider::FileSystem do
       '.spa',
       '.sph',
       '.spm',
-      '.spp'
+      '.spp',
+      '.spk'
     ].collect{|s| "some_index#{s}" }
 
     @filenames.each do |f|

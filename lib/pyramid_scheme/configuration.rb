@@ -6,7 +6,8 @@ module PyramidScheme
       '.sph',
       '.spi',
       '.spm',
-      '.spp'
+      '.spp',
+      '.spk'
     ]
 
     def initialize(options = {})
