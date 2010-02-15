@@ -5,6 +5,7 @@ describe PyramidScheme::IndexServer do
 
   before(:each) do
     @server = PyramidScheme::IndexServer.new
+    @server.indexer.stub(:configure)
     @server.indexer.stub(:index)
     FileUtils.mkdir_p(PyramidScheme.configuration[:server_destination_path])
     FileUtils.mkdir_p(PyramidScheme.configuration[:client_source_path])
@@ -26,6 +27,10 @@ describe PyramidScheme::IndexServer do
     @server.indexer.should be_kind_of(PyramidScheme::Indexer::Ultrasphinx)
   end
 
+  it 'should configure via the indexer' do
+    @server.indexer.expects(:configure).once
+    @server.index
+  end
   it 'should index via the indexer' do
     @server.indexer.expects(:index).once
     @server.index

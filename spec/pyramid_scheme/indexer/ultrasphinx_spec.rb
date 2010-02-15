@@ -5,11 +5,11 @@ describe PyramidScheme::Indexer::Ultrasphinx do
     @indexer = PyramidScheme::Indexer::Ultrasphinx.new
   end
 
-  it 'should have the default rake task of ultrasphinx:index' do
-    @indexer.class.default_task_name.should eql('ultrasphinx:index')
+  it 'should have the indexer task of ultrasphinx:index' do
+    @indexer.class.index_task_name.should eql('ultrasphinx:index')
   end
 
-  it 'should default to the default rake task' do
-    @indexer.rake_task_name.should eql(@indexer.class.default_task_name)
+  it 'should have the configure task of ultrasphinx:configure' do
+    @indexer.class.configure_task_name.should eql('ultrasphinx:configure')
   end
 end

@@ -18,6 +18,7 @@ module PyramidScheme
     # run the index
     def index
       create_lock_file
+      indexer.configure
       indexer.index
       destroy_lock_file
       index_provider.process_index
