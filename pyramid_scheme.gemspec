@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pyramid_scheme}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Pickett"]
-  s.date = %q{2010-02-08}
+  s.date = %q{2010-02-15}
   s.description = %q{Sphinx index propagtion (currently via the filesystem)}
   s.email = %q{dpickett@enlightsolutions.com}
   s.extra_rdoc_files = [
@@ -29,7 +29,9 @@ Gem::Specification.new do |s|
      "lib/pyramid_scheme/index_lock_file.rb",
      "lib/pyramid_scheme/index_provider/file_system.rb",
      "lib/pyramid_scheme/index_server.rb",
-     "lib/pyramid_scheme/indexer.rb",
+     "lib/pyramid_scheme/indexer/base.rb",
+     "lib/pyramid_scheme/indexer/thinking_sphinx.rb",
+     "lib/pyramid_scheme/indexer/ultrasphinx.rb",
      "lib/pyramid_scheme/required_configuration_not_found.rb",
      "lib/pyramid_scheme/tasks.rb",
      "lib/pyramid_scheme/tasks/rake_tasks.rake",
@@ -41,8 +43,8 @@ Gem::Specification.new do |s|
      "spec/pyramid_scheme/index_provider/file_system_spec.rb",
      "spec/pyramid_scheme/index_provider_configuration_spec.rb",
      "spec/pyramid_scheme/index_server_spec.rb",
-     "spec/pyramid_scheme/thinking_sphinx_indexer_spec.rb",
-     "spec/pyramid_scheme/ultrasphinx_indexer_spec.rb",
+     "spec/pyramid_scheme/indexer/thinking_sphinx_spec.rb",
+     "spec/pyramid_scheme/indexer/ultrasphinx_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "tasks/pyramid_scheme.rake"
@@ -57,8 +59,8 @@ Gem::Specification.new do |s|
      "spec/pyramid_scheme/index_provider/file_system_spec.rb",
      "spec/pyramid_scheme/index_provider_configuration_spec.rb",
      "spec/pyramid_scheme/index_server_spec.rb",
-     "spec/pyramid_scheme/thinking_sphinx_indexer_spec.rb",
-     "spec/pyramid_scheme/ultrasphinx_indexer_spec.rb",
+     "spec/pyramid_scheme/indexer/thinking_sphinx_spec.rb",
+     "spec/pyramid_scheme/indexer/ultrasphinx_spec.rb",
      "spec/pyramid_scheme.rb",
      "spec/spec_helper.rb"
   ]
