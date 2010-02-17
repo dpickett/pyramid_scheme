@@ -17,7 +17,11 @@ module PyramidScheme
 
     def bounce_pids
       searchd_pids.each do |pid|
-        Process.kill("HUP", pid.to_i) if pid != ""
+        begin
+          Process.kill("HUP", pid.to_i) if pid != ""
+        rescue Exception => e
+          raise e unless e.message =~ /No such process/i
+        end
       end
     end
 
