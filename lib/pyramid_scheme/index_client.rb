@@ -12,7 +12,7 @@ module PyramidScheme
 
     def searchd_pids
       ps_output = `ps ax | grep searchd`
-      ps_output.split("\n").collect{|p| /^(\d*)/.match(p)[0]}
+      ps_output.split("\n").collect{|p| /^\s*(\d*)/.match(p)[1]}
     end
 
     def bounce_pids
