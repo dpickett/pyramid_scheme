@@ -11,7 +11,7 @@ describe PyramidScheme::IndexClient do
  
   it 'should send SIGHUP to active searchd processes' do
     @client.expects(:searchd_pids).returns(["4345"])
-    Process.expects(:kill).with("HUP", "4345")
+    Process.expects(:kill).with("HUP", 4345)
     @client.bounce_pids
   end
 end

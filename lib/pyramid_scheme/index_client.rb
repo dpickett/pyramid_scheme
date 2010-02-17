@@ -17,10 +17,7 @@ module PyramidScheme
 
     def bounce_pids
       searchd_pids.each do |pid|
-        begin
-          Process.kill("HUP", pid)
-        rescue 
-        end
+        Process.kill("HUP", pid.to_i) if pid != ""
       end
     end
 
