@@ -11,7 +11,9 @@ require 'pyramid_scheme/indexer/ultrasphinx'
 
 require 'pyramid_scheme/index_lock_file'
 require 'pyramid_scheme/configuration'
+require 'pyramid_scheme/index_provider/base'
 require 'pyramid_scheme/index_provider/file_system'
+require 'pyramid_scheme/index_provider/s3'
 
 require 'pyramid_scheme/index_server'
 
