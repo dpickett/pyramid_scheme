@@ -28,12 +28,19 @@ module PyramidScheme
       def provide_client_with_index
         raise_override
       end
+      
+      def lock
+        raise_override
+      end
 
       def retrieve_index
         client_copy
       end
 
-
+      def index_in_progress?
+        lock.exists?
+      end
+      
       protected
       def ensure_required_options_are_present
         self.class.required_options.each do |opt|

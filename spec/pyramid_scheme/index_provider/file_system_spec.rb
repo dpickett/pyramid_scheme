@@ -95,18 +95,22 @@ describe "copying from the filesytem" do
     ].collect{|s| "some_index#{s}" }
 
     @filenames.each do |f|
-      FileUtils.touch(File.join(PyramidScheme.configuration[:client_source_path], f))
-      File.exists?(File.join(PyramidScheme.configuration[:client_source_path], f)).should be_true
+      FileUtils.touch(::File.join(PyramidScheme.configuration[:client_source_path], f))
+      ::File.exists?(::File.join(PyramidScheme.configuration[:client_source_path], f)).should be_true
     end
 
     @provider.retrieve_index
 
     @filenames.each do |f|
-      new_filename = File.basename(f).gsub(/\./, ".new.")
-      File.exists?(File.join(PyramidScheme.configuration[:client_destination_path], 
+      new_filename = ::File.basename(f).gsub(/\./, ".new.")
+      ::File.exists?(::File.join(PyramidScheme.configuration[:client_destination_path], 
         new_filename)).should be_true
     end
 
+  end
+  
+  it 'should have a lock file' do
+    @provider.lock.should be_kind_of(PyramidScheme::Lock::File)
   end
 end
 

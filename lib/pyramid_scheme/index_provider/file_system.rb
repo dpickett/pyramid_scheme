@@ -13,12 +13,12 @@ module PyramidScheme
       end
       attr_reader :configuration, :copy_attempts
 
-      def index_in_progress?
-        PyramidScheme::IndexLockFile.exists?
-      end
-
       def process_index
         server_copy
+      end
+      
+      def lock
+        @lock ||= PyramidScheme::Lock::File.new
       end
  
       def provide_client_with_index

@@ -26,11 +26,11 @@ module PyramidScheme
 
     private
       def create_lock_file
-        PyramidScheme::IndexLockFile.create
+        @index_provider.lock.create
       end
 
       def destroy_lock_file
-        PyramidScheme::IndexLockFile.destroy
+        @index_provider.lock.destroy
       end
   end
 end
