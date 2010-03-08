@@ -5,9 +5,9 @@ module PyramidScheme
     # initializes a new index server
     # @param options [Hash] takes an optional :indexer_class (defaults to PyramidScheme::ThinkingSphinxIndexer 
     def initialize(options = {})
-      @index_provider = PyramidScheme::IndexProvider::FileSystem.new
       @configuration = PyramidScheme::Configuration.new
-      @indexer_class = configuration[:indexer_class] || PyramidScheme::Indexer::ThinkingSphinx
+      @index_provider = @configuration[:index_provider_class].new
+      @indexer_class = @configuration[:indexer_class]
     end
 
     # @returns [PyramidScheme::Indexer::Base] an instance of the specified indexer_class from initialization

@@ -26,7 +26,11 @@ module PyramidScheme
     end
 
     def self.defaults
-      { :lock_file_name => 'pyramid_scheme_index_in_progress.txt' } 
+      { 
+        :lock_file_name       => 'pyramid_scheme_index_in_progress.txt',
+        :index_provider_class => PyramidScheme::IndexProvider::FileSystem, 
+        :indexer_class        => PyramidScheme::Indexer::ThinkingSphinx
+      } 
     end
 
     def [](key)

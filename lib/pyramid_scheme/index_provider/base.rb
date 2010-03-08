@@ -11,6 +11,8 @@ module PyramidScheme
         end
       end
 
+      attr_reader :configuration, :copy_attempts
+
       def initialize(options = {})
         @configuration = PyramidScheme::Configuration.new(options)
         ensure_required_options_are_present
@@ -44,7 +46,7 @@ module PyramidScheme
       protected
       def ensure_required_options_are_present
         self.class.required_options.each do |opt|
-          if configuration[opt].nil?
+          if @configuration[opt].nil?
             raise PyramidScheme::RequiredConfigurationNotFound, 
               "the #{opt} setting was not found"
           end

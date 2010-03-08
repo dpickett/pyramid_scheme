@@ -13,6 +13,7 @@ begin
     gem.authors = ["Dan Pickett"]
     gem.add_dependency "rake", ">= 0.8.7"
     gem.add_dependency "configatron"
+    gem.add_dependency "aws-s3", ">= 0.5.1"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
     gem.add_development_dependency "mocha", "0.9.8"
@@ -27,7 +28,16 @@ end
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.libs << 'lib' << 'spec'
-  spec.spec_files = FileList['spec/**/*_spec.rb']
+  spec.spec_files = FileList['spec/pyramid_scheme/*_spec.rb']
+end
+
+namespace :spec do
+
+  Spec::Rake::SpecTask.new(:integrations) do |spec|
+    spec.libs << 'lib' << 'spec'
+    spec.spec_files = FileList['spec/integrations/*_spec.rb']
+
+  end
 end
 
 Spec::Rake::SpecTask.new(:rcov) do |spec|

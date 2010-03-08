@@ -11,7 +11,6 @@ module PyramidScheme
           ]
         end
       end
-      attr_reader :configuration, :copy_attempts
 
       def process_index
         server_copy

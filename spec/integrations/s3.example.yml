@@ -1,0 +1,5 @@
+access_key: key
+secret_access_key: key
+bucket: bucket_name
+prefix: some_path_prefix
+

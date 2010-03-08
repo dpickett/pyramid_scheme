@@ -20,3 +20,11 @@ Spec::Runner.configure do |config|
     end
   end  
 end
+
+module FakeFS
+  class File
+    def size
+      0
+    end
+  end
+end

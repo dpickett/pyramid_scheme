@@ -2,7 +2,8 @@ module PyramidScheme
   class IndexClient
     attr_reader :index_provider
     def initialize(options = {})
-      @index_provider = PyramidScheme::IndexProvider::FileSystem.new
+      @configuration = PyramidScheme::Configuration.new(options)
+      @index_provider = @configuration[:index_provider_class].new
     end
 
     def retrieve_index
