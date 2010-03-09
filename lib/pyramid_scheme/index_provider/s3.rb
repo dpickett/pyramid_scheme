@@ -37,8 +37,8 @@ module PyramidScheme
       
       def provide_client_with_index
         Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
-          self.class.bucket.keys('prefix'=> @configuration[:prefix]).each do |obj|
-            new_filename = File.basename(obj.name.gsub(@configuration[:prefix], '').gsub(/\./, ".new."))
+          self.class.bucket.keys('prefix'=> @configuration[:prefix] + "/").each do |obj|
+            new_filename = File.basename(obj.name.gsub(@configuration[:prefix] + "/", '').gsub(/\./, ".new."))
             destined_path = File.join(@configuration[:client_destination_path], new_filename)
             File.open(destined_path, 'w') do |file|
               file.write obj.data
