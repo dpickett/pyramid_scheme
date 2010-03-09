@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 
 require 'configatron'
-require 'aws/s3'
+require 'right_aws'
 
 require 'pyramid_scheme/required_configuration_not_found'
 

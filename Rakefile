@@ -13,7 +13,7 @@ begin
     gem.authors = ["Dan Pickett"]
     gem.add_dependency "rake", ">= 0.8.7"
     gem.add_dependency "configatron"
-    gem.add_dependency "aws-s3", ">= 0.5.1"
+    gem.add_dependency "right_aws", ">= 1.10.0"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_development_dependency "yard", ">= 0"
     gem.add_development_dependency "mocha", "0.9.8"
