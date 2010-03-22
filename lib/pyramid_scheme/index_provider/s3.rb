@@ -34,7 +34,7 @@ module PyramidScheme
       def provide_client_with_index
         Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
           AWS::S3::Bucket.objects(@configuration[:bucket], 
-            :prefix => @configuration[:prefix]).each do |obj|
+            :prefix => "#{@configuration[:prefix]}/").each do |obj|
               
             new_filename = File.basename(obj.key.gsub(@configuration[:prefix], '').gsub(/\./, ".new."))
             destined_path = File.join(@configuration[:client_destination_path], new_filename)
