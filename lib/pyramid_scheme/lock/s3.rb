@@ -1,28 +1,27 @@
 module PyramidScheme
   module Lock
     class S3 < PyramidScheme::Lock::Base
-      attr_reader :bucket
-
       def initialize
-        @bucket = PyramidScheme::IndexProvider::S3.bucket
+        PyramidScheme::IndexProvider::S3.establish_connection!
       end
 
       def exists?
-        key = RightAws::S3::Key.create(bucket, key_name)
-        key.exists?
+        AWS::S3::S3Object.exists?(key_name, bucket)
       end
 
       def create
-        key = RightAws::S3::Key.create(bucket, key_name)
-        key.put("")
+        AWS::S3::S3Object.store(key_name, "", bucket)
       end
 
       def destroy
-        key = RightAws::S3::Key.create(bucket, key_name)
-        key.delete
+        AWS::S3::S3Object.delete(key_name, bucket)
       end
 
       protected
+      def bucket
+        PyramidScheme.configuration[:bucket]
+      end
+
       def key_name
         "#{PyramidScheme.configuration[:prefix]}/#{PyramidScheme.configuration[:lock_file_name]}"
       end

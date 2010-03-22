@@ -43,9 +43,8 @@ describe "S3 index provider" do
       @provider.process_index
    
       @filenames.each do |f|
-        key = RightAws::S3::Key.create(PyramidScheme::IndexProvider::S3.bucket, 
-          "#{PyramidScheme.configuration[:prefix]}/#{f}")
-        key.exists?.should be_true
+        AWS::S3::S3Object.exists?("#{PyramidScheme.configuration[:prefix]}/#{@filename}", 
+          PyramidScheme.configuration[:bucket])
       end
     end
   end
