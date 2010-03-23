@@ -72,19 +72,12 @@ describe "S3 index provider" do
 
   def load_configuration_from_yaml
     FakeFS.deactivate!
-    yml_config = YAML.load_file(File.join(File.dirname(__FILE__), 's3.yml'))
     
     PyramidScheme.configure do |config|
       config.index_provider_class = PyramidScheme::IndexProvider::S3
-      config.access_key = yml_config["access_key"]
-      config.secret_access_key = yml_config["secret_access_key"]
-      config.bucket = yml_config["bucket"]
-      config.prefix = yml_config["prefix"]
-      config.server_source_path = "/some/server/source"
-      config.client_destination_path = "/some/client/destination"
-    end
+    end 
 
+    PyramidScheme.configure_with_yml(File.join(File.dirname(__FILE__), 's3.yml'))
     FakeFS.activate!
-
   end
 end
