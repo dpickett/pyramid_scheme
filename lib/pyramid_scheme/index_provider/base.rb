@@ -46,7 +46,7 @@ module PyramidScheme
       protected
       def ensure_required_options_are_present
         self.class.required_options.each do |opt|
-          if @configuration[opt].nil?
+          if @configuration[opt].nil? || @configuration[opt] == ''
             raise PyramidScheme::RequiredConfigurationNotFound, 
               "the #{opt} setting was not found"
           end

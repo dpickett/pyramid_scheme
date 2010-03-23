@@ -21,3 +21,5 @@ pkg
 ## PROJECT::SPECIFIC
 *.gemspec
 spec/integrations/s3.yml
+spec/integrations/destination/*
+spec/integrations/source/*
