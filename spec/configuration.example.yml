@@ -1,0 +1,6 @@
+access_key: access_key
+secret_access_key: secret_access_key
+bucket: some_bucket
+prefix: some_prefix
+server_source_path: "/some/server/source"
+client_destination_path: "/some/client/destination"

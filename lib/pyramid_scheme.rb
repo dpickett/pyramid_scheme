@@ -30,6 +30,10 @@ module PyramidScheme
     PyramidScheme::Configuration.set(&block)
   end
 
+  def self.configure_with_yml(path)
+    PyramidScheme::Configuration.set_from_yml(path)
+  end
+
   def self.configuration
     PyramidScheme::Configuration.new
   end

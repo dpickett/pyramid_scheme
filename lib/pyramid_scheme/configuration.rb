@@ -25,6 +25,15 @@ module PyramidScheme
       end
     end
 
+    def self.set_from_yml(path)
+      config_hash = YAML::load(File.open(path))
+      set do |config|
+        config_hash.each do |key, value|
+          config.send("#{key}=", value)
+        end
+      end
+    end
+
     def self.defaults
       { 
         :lock_file_name       => 'pyramid_scheme_index_in_progress.txt',
