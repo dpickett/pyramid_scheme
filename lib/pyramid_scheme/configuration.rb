@@ -29,7 +29,11 @@ module PyramidScheme
       config_hash = YAML::load(File.open(path))
       set do |config|
         config_hash.each do |key, value|
-          config.send("#{key}=", value)
+          if key =~ /class$/
+            config.send("#{key}=", recursive_const_get(value))
+          else
+            config.send("#{key}=", value)
+          end
         end
       end
     end
@@ -44,6 +48,16 @@ module PyramidScheme
 
     def [](key)
       configatron.pyramid_scheme.to_hash[key] 
+    end
+
+    def self.recursive_const_get(klass_str, mod_base = Kernel)
+      first_namespace = klass_str[/^\w*\:\:/]
+      if first_namespace.nil?
+        mod_base.const_get(klass_str)
+      else
+        recursive_const_get(klass_str.gsub(first_namespace, ""),
+          mod_base.const_get(first_namespace[0..-3]))
+      end
     end
   end
 end
