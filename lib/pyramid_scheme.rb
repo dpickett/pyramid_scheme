@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/tasklib'
 
 require 'configatron'
 require 'aws/s3'
