@@ -21,6 +21,7 @@ module PyramidScheme
       indexer.configure
       indexer.index
       destroy_lock_file
+      PyramidScheme::ProcessManager.bounce_searchd
       index_provider.process_index
     end
 

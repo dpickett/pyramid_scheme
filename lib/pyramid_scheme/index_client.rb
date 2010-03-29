@@ -11,19 +11,8 @@ module PyramidScheme
       bounce_pids
     end
 
-    def searchd_pids
-      Rush.processes.filter(:cmdline => /searchd/)
-    end
-
     def bounce_pids
-      searchd_pids.each do |process|
-        begin
-          Process.kill("HUP", process.pid) 
-        rescue Exception => e
-          raise e unless e.message =~ /No such process/i
-        end
-      end
+      PyramidScheme::ProcessManager.bounce_searchd
     end
-
   end
 end

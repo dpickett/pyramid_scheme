@@ -20,6 +20,8 @@ Spec::Runner.configure do |config|
       config.server_destination_path = '/some/server/destination'
     end
   end  
+
+  config.mock_with :mocha
 end
 
 module FakeFS

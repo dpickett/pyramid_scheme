@@ -5,8 +5,8 @@ describe PyramidScheme::IndexServer do
 
   before(:each) do
     @server = PyramidScheme::IndexServer.new
-    @server.indexer.stub(:configure)
-    @server.indexer.stub(:index)
+    @server.indexer.stubs(:configure)
+    @server.indexer.stubs(:index)
     FileUtils.mkdir_p(PyramidScheme.configuration[:server_destination_path])
     FileUtils.mkdir_p(PyramidScheme.configuration[:client_source_path])
   end
@@ -37,12 +37,12 @@ describe PyramidScheme::IndexServer do
   end
 
   it 'should touch a lock file before indexing' do
-    FileUtils.should_receive(:touch)
+    FileUtils.expects(:touch)
     @server.index
   end
 
   it 'should remove the lock file after indexing' do
-    FileUtils.should_receive(:rm_f)
+    FileUtils.expects(:rm_f)
     @server.index
   end
 

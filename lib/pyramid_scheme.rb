@@ -12,6 +12,7 @@ require 'pyramid_scheme/indexer/base'
 require 'pyramid_scheme/indexer/thinking_sphinx'
 require 'pyramid_scheme/indexer/ultrasphinx'
 require 'pyramid_scheme/configuration'
+require 'pyramid_scheme/process_manager'
 
 require 'pyramid_scheme/index_provider/base'
 require 'pyramid_scheme/index_provider/file_system'
