@@ -12,14 +12,13 @@ module PyramidScheme
     end
 
     def searchd_pids
-      ps_output = `ps ax | grep searchd`
-      ps_output.split("\n").collect{|p| /^\s*(\d*)/.match(p)[1]}
+      Rush.processes.filter(:cmdline => /searchd/)
     end
 
     def bounce_pids
-      searchd_pids.each do |pid|
+      searchd_pids.each do |process|
         begin
-          Process.kill("HUP", pid.to_i) if pid != ""
+          Process.kill("HUP", process.pid) 
         rescue Exception => e
           raise e unless e.message =~ /No such process/i
         end

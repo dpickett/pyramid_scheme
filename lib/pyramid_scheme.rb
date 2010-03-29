@@ -4,6 +4,7 @@ require 'rake/tasklib'
 
 require 'configatron'
 require 'aws/s3'
+require 'rush'
 
 require 'pyramid_scheme/required_configuration_not_found'
 
