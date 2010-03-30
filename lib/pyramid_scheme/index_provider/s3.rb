@@ -32,17 +32,15 @@ module PyramidScheme
       end
 
       def provide_client_with_index
-        Configuration::INDEX_FILE_EXTENSIONS.each do |ext|
-          AWS::S3::Bucket.objects(@configuration[:bucket], 
-            :prefix => "#{@configuration[:prefix]}/").each do |obj|
-              
-            unless obj.key =~ /\.new\./
-              new_filename = File.basename(obj.key.gsub("#{@configuration[:prefix]}/", '').gsub(/\./, ".new."))
-              destined_path = File.join(@configuration[:client_destination_path], new_filename)
-              File.open(destined_path, 'w') do |file|
-                AWS::S3::S3Object.stream(obj.key, @configuration[:bucket]) do |chunk|
-                  file.write chunk
-                end
+        AWS::S3::Bucket.objects(@configuration[:bucket], 
+          :prefix => "#{@configuration[:prefix]}/").each do |obj|
+            
+          unless obj.key =~ /\.new\./
+            new_filename = File.basename(obj.key.gsub("#{@configuration[:prefix]}/", '').gsub(/\./, ".new."))
+            destined_path = File.join(@configuration[:client_destination_path], new_filename)
+            File.open(destined_path, 'w') do |file|
+              AWS::S3::S3Object.stream(obj.key, @configuration[:bucket]) do |chunk|
+                file.write chunk
               end
             end
           end
