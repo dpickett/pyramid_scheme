@@ -17,15 +17,23 @@ module PyramidScheme
 
     # run the index
     def index
+      kill_searchd unless @configuration[:permit_server_daemon]
       create_lock_file
       indexer.configure
       indexer.index
       destroy_lock_file
-      PyramidScheme::ProcessManager.bounce_searchd
+      bounce_searchd
       index_provider.process_index
     end
 
     private
+      def kill_searchd
+        PyramidScheme::ProcessManager.kill_searchd
+      end
+      
+      def bounce_searchd
+        PyramidScheme::ProcessManager.bounce_searchd
+      end
       def create_lock_file
         @index_provider.lock.create
       end

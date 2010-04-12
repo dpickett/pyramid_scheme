@@ -19,10 +19,12 @@ module PyramidScheme
     end 
 
     def self.set(&block)
-      yield(configatron.pyramid_scheme)
-      defaults.each do |key, value|
-        configatron.pyramid_scheme.send("#{key}=", value) unless configatron.pyramid_scheme.to_hash[key]
+      self.defaults.each do |key, value|
+        if configatron.pyramid_scheme.send("#{key}").nil? || configatron.pyramid_scheme.send("#{key}") == ""
+          configatron.pyramid_scheme.send("#{key}=", value)
+        end
       end
+      yield(configatron.pyramid_scheme)
     end
 
     def self.set_from_yml(path)
@@ -42,7 +44,8 @@ module PyramidScheme
       { 
         :lock_file_name       => 'pyramid_scheme_index_in_progress.txt',
         :index_provider_class => PyramidScheme::IndexProvider::FileSystem, 
-        :indexer_class        => PyramidScheme::Indexer::ThinkingSphinx
+        :indexer_class        => PyramidScheme::Indexer::ThinkingSphinx,
+        :permit_server_daemon => true
       } 
     end
 

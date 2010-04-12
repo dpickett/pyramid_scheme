@@ -50,4 +50,35 @@ describe PyramidScheme::IndexServer do
     @server.index_provider.expects(:process_index)
     @server.index
   end
+  
+  it 'should kill searchd if the daemon is disallowed' do
+    PyramidScheme.configure do |config|
+      config.permit_server_daemon = false
+    end
+    
+    stub_server
+
+    PyramidScheme::ProcessManager.expects(:kill_searchd).once
+    
+    @server.index
+  end
+  
+  it 'should not kill searchd if the daemon is allowed' do
+    PyramidScheme.configure do |config|
+      config.permit_server_daemon = true
+    end
+    
+    stub_server
+    
+    PyramidScheme::ProcessManager.expects(:kill_searchd).never
+    
+    @server.index
+  end
+  
+  def stub_server
+    @server = PyramidScheme::IndexServer.new
+    @server.indexer.stubs(:configure)
+    @server.indexer.stubs(:index)
+  end
+    
 end
