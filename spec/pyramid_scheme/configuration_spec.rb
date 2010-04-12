@@ -19,5 +19,10 @@ describe PyramidScheme::Configuration do
     it 'should cast a string to a class if suffix of the configuraiton is class' do
       PyramidScheme.configuration[:index_provider_class].should eql(PyramidScheme::IndexProvider::S3)
     end
+    
+    it 'should cast a string to boolean off of a yml file' do
+      #this is redundantly checking YML's functionality but we want to be sure
+      PyramidScheme.configuration[:permit_server_daemon].should be_false
+    end
   end
 end

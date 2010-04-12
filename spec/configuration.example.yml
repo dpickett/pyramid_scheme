@@ -5,3 +5,4 @@ prefix: some_prefix
 index_provider_class: PyramidScheme::IndexProvider::S3
 server_source_path: "/some/server/source"
 client_destination_path: "/some/client/destination"
+permit_server_daemon: false
